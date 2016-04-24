@@ -8,7 +8,7 @@ import {
 } from 'graphql';
 import postType from './PostType';
 
-import {getPosts} from '../utils';
+import {getPost} from '../utils';
 // Define the User type with two string fields: `id` and `name`.
 // The type of User is GraphQLObjectType, which has child fields
 // with their own types (in this case, GraphQLString).
@@ -21,7 +21,7 @@ var userType = new GraphQLObjectType({
      age: {type:GraphQLInt},
      posts:{
        type: new GraphQLList(postType),
-       resolve: (user) => getPosts(user),
+       resolve: (user) => getPost(user),
 
      }
    }

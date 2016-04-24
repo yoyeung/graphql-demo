@@ -7,7 +7,7 @@ import {
   GraphQLList
 } from 'graphql';
 import userType from './UserType';
-import {getUsers} from '../utils';
+import {getUser} from '../utils';
 
 var postType = new GraphQLObjectType({
  name:'Post',
@@ -18,7 +18,7 @@ var postType = new GraphQLObjectType({
      editors:{
        type: new GraphQLList(userType),
        resolve(post){
-         return getUsers(post)
+         return getUser(post)
        }
      }
    }

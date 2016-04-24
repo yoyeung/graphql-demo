@@ -4,7 +4,8 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
-  GraphQLList
+  GraphQLList,
+  GraphQLNonNull
 } from 'graphql';
 import graphqlHTTP from 'express-graphql';
 import express from 'express';
@@ -28,7 +29,7 @@ var schema = new GraphQLSchema({
         type: UserType,
         // `args` describes the arguments that the `user` query accepts
         args: {
-          id: { type: GraphQLString }
+          id: { type: new GraphQLNonNull(GraphQLString) }
         },
         resolve:  (_, args) => getUserById(args.id)
 
