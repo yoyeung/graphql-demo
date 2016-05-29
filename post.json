@@ -1,11 +1,11 @@
 [
   {
-    "id":1,
+    "id":"1",
     "title":"Hello world",
-    "editor":["2","3"]
+    "editors":["2","3"]
   },{
-    "id":2,
+    "id":"2",
     "title":"Hello world 2",
-    "editor":["1","2"]
+    "editors":["1","2"]
   }
 ]

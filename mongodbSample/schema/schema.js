@@ -1,3 +1,4 @@
+import {getUsers,getPosts,getUserById,getPostById} from '../utils';
 import {
   graphql,
   GraphQLSchema,
@@ -7,20 +8,8 @@ import {
   GraphQLList,
   GraphQLNonNull
 } from 'graphql';
-import graphqlHTTP from 'express-graphql';
-import express from 'express';
+import { UserType,PostType } from '../../type';
 
-// Import the data you created above
-
-import {UserType,PostType} from './type';
-
-import {getUsers,getPosts,getUserById,getPostById} from './utils';
-
-
-// Define the schema with one top-level field, `user`, that
-// takes an `id` argument and returns the User with that ID.
-// Note that the `query` is a GraphQLObjectType, just like User.
-// The `user` field, however, is a userType, which we defined above.
 var schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'Query',
@@ -58,8 +47,4 @@ var schema = new GraphQLSchema({
   })
 });
 
-express()
-  .use('/graphql', graphqlHTTP({ schema: schema, pretty: true }))
-  .listen(process.env.PORT||3000);
-
-console.log(`GraphQL server running on http://localhost:${process.env.PORT||3000}/graphql`);
+export default schema;

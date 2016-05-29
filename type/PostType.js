@@ -13,11 +13,12 @@ var postType = new GraphQLObjectType({
  name:'Post',
  fields:()=>{
    return {
-     id:{type:GraphQLInt},
+     id:{type:GraphQLString},
      title:{type:GraphQLString},
      editors:{
        type: new GraphQLList(userType),
        resolve(post){
+         console.log("what?",post);
          return getUser(post)
        }
      }
