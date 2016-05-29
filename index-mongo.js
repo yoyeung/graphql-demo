@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
 import schema from './mongodbSample/schema/schema';
-import {graphql} from 'graphql';
+import {graphql,formatError} from 'graphql';
 
 const app = express();
 const PORT= process.env.PORT || 3000;
@@ -18,7 +18,12 @@ app.use(bodyParser.text({
 app.post('/graphql', (req, res) => {
 
 	graphql(schema, req.body).then((result) => {
-		console.log(result);
+
+		if(Object.keys(result).indexOf('errors')>=0){
+
+			result.errors=result.errors.map(formatError);
+
+		}
 		res.json(result);
 	});
 });
