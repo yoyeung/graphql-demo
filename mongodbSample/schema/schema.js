@@ -1,49 +1,21 @@
-import {getUsers,getPosts,getUserById,getPostById} from '../utils';
+
 import {
-  graphql,
+
   GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLList,
-  GraphQLNonNull
+  GraphQLObjectType
 } from 'graphql';
-import { UserType,PostType } from '../../type';
+import queries from './queries';
+import mutations from './mutations';
+
 
 var schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'Query',
-    fields: {
-      user: {
-        type: UserType,
-        // `args` describes the arguments that the `user` query accepts
-        args: {
-          id: { type: new GraphQLNonNull(GraphQLString) }
-        },
-        resolve:  (_, args) => getUserById(args.id)
-
-      },
-      users:{
-        type: new GraphQLList(UserType),
-        args: {},
-        resolve:  (_)=> getUsers()
-      },
-      post: {
-        type: PostType,
-        // `args` describes the arguments that the `user` query accepts
-        args: {
-          id: { type: GraphQLInt }
-        },
-        resolve:  (_, args)=> getPostById(args.id)
-
-      },
-      posts: {
-        type: new GraphQLList(PostType),
-        // `args` describes the arguments that the `user` query accepts
-        args: {},
-        resolve: () => getPosts()
-      }
-    }
+    fields: queries
+  }),
+  mutation: new GraphQLObjectType({
+    name: 'Mutation',
+    fields: mutations
   })
 });
 

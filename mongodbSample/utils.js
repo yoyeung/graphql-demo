@@ -41,20 +41,24 @@ export function getPostById(id){
 }
 
 export function getUsers(){
-  console.log("what?");
   return User.find({},(err,users)=>{
-    console.log(err,users);
     if(err) return {};
     return users;
   });
   // return users;
 }
-
+export function createUser(user){
+  var newUser = new User(user);
+  return newUser.save((err,doc)=>{
+    console.log(err,doc);
+    return doc;
+  });
+}
 export function getPosts(){
   console.log("lol");
   return Post.find({},(err,posts)=>{
     console.log(err,posts);
-    if(err) return {};
+    if(err) return err;
     return posts;
   });
   // return posts;
